@@ -1,0 +1,23 @@
+<meta charset="UTF-8">
+
+<h1>PROGRAMA - TABLA DE MULTIPLICAR</h1>
+
+<script>
+
+    function saltarLinea() {
+        document.write("<br>");    
+    }  
+
+    function imprimir(frase) {
+        document.write(frase);
+        saltarLinea();
+    }
+    
+    var numero = parseInt(prompt("Ingrese el multiplicando"));
+    var limite = parseInt(prompt("¿Hasta qué número desea generar la tabla de multiplicar?"));
+
+    for (var contador = 1; contador <= limite; contador++){
+        imprimir(numero+" * "+contador+" = "+ Math.round(numero*contador));
+    }
+
+</script>

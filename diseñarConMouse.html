@@ -1,0 +1,85 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+    var pantalla = document.querySelector('canvas');
+    var pincel = pantalla.getContext('2d');
+
+    pincel.fillStyle = 'lightgrey';
+    pincel.fillRect(0, 0, 600, 400);
+
+//dibujar
+    var puedoDibujar = false;
+    function dibujarCirculo(evento,colorNuevo) {
+        if(puedoDibujar) {
+            var x = evento.pageX - pantalla.offsetLeft;
+            var y = evento.pageY - pantalla.offsetTop;
+            pincel.fillStyle = colorNuevo;
+            pincel.beginPath();
+            pincel.arc(x, y, 5, 0, 2 * Math.PI);
+            pincel.fill();
+        }
+    }
+
+    function habilitarDibujar() {
+        puedoDibujar = true;
+    }
+
+    function deshabilitarDibujar() {
+        puedoDibujar = false;
+    }
+
+    pantalla.onmousemove = function(evento) {
+        dibujarCirculo(evento, colorNuevo);
+    };
+    pantalla.onmousedown = habilitarDibujar;
+    pantalla.onmouseup = deshabilitarDibujar;
+
+//paleta de colores
+    function dibujarRectangulo(x,color) {
+        pincel.fillStyle=color;
+        pincel.fillRect(x,0,50,50);
+        pincel.strokeStyle="black";
+        pincel.strokeRect(x,0,50,50);
+    }
+
+    var base = 50;
+    var altura = 50;
+    function paletaColores(x,colores) {
+        var sumaBase = 0;
+        for( var i = 0; i < colores.length; i++){
+            base = 50;
+            dibujarRectangulo(x+sumaBase,colores[i]);
+            sumaBase = sumaBase + base;
+        }
+    }
+
+    var colores = ["red","green","blue"]
+    paletaColores(0,colores);
+
+//cabiar color
+    var colorNuevo = "blue";
+    function cambiarColor(evento){
+        var x = evento.pageX - pantalla.offsetLeft;
+        var y = evento.pageY - pantalla.offsetTop;
+        
+        if ((x < base) &&
+            (x > 0) &&
+            (y < 50) &&
+            (y > 0)){
+            colorNuevo = colores[0];
+        }else if ((x < base*2) &&
+            (x > base) &&
+            (y < 50) &&
+            (y > 0)){
+            colorNuevo = colores[1];
+        }else if ((x < base*3) &&
+            (x > base*2) &&
+            (y < 50) &&
+            (y > 0)){
+            colorNuevo = colores[2];
+        }
+    }
+
+    pantalla.onclick = cambiarColor;
+
+</script>

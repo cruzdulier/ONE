@@ -1,0 +1,42 @@
+<meta charset="UTF-8">
+
+<h1> PROGRAMA - JUEGO DE ADIVINACIÓN </h1>
+
+<script>
+	function saltarLinea() {
+        document.write("<br>");    
+        document.write("<br>");    
+        document.write("<br>");
+    }  
+    function imprimir(frase) {
+        
+        document.write(frase);
+        saltarLinea();
+    }
+ 
+    var numeropensado = Math.round(Math.random()*10);
+    var intentos = 3;
+    var contador = 1;
+
+    alert("¡Adivina el número!");
+
+    while (contador<=intentos) {
+        var numeroLanzado = parseInt(prompt("Ingrese un número entre 0-10"));
+        if(numeropensado == numeroLanzado){
+            alert("Usted acertó en el intento "+ contador+ " el número era "+ numeropensado+ ". Presiona F5 para jugar de nuevo");
+            break;
+        }
+        else {
+            if (numeroLanzado > numeropensado && contador < 3) {
+                alert("El número es menor, intente de nuevo");
+            } if (numeroLanzado < numeropensado && contador < 3) {
+                alert("El número es mayor, intente de nuevo");
+            } if (contador == 2){
+                alert("Última oportunidad");
+            } if (contador == 3){
+                alert("Ha fallado, el número pensado era "+numeropensado+ ". Presione F5 para jugar de nuevo");
+            }
+        }
+        contador++;
+    }
+</script>
